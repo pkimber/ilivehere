@@ -1,6 +1,4 @@
-"""
-Django settings for CRM project.
-"""
+""" Django settings """
 from django.core.urlresolvers import reverse_lazy
 
 DEBUG = True
@@ -12,7 +10,7 @@ CSRF_COOKIE_SECURE = False
 TEMPLATE_STRING_IF_INVALID = '**** INVALID EXPRESSION: %s ****'
 
 ADMINS = (
-    ('connexionSW', 'stephen.wright@connexionsw.com'),
+    ('admin', 'code@pkimber.net'),
 )
 
 MANAGERS = ADMINS
@@ -123,8 +121,10 @@ INSTALLED_APPS = (
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
     'reversion',
-    'south',
+    #'south',
+    'base',
     'example',
+    'login',
 )
 
 # A sample logging configuration. The only tangible logging
@@ -155,3 +155,7 @@ LOGGING = {
         },
     }
 }
+
+# URL where requests are redirected after login when the contrib.auth.login
+# view gets no next parameter.
+LOGIN_REDIRECT_URL = reverse_lazy('project.home.user')

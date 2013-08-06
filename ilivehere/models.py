@@ -31,7 +31,9 @@ reversion.register(Area)
 
 class Event(TimeStampedModel):
     """ Event """
-    owner = models.OneToOneField(settings.AUTH_USER_MODEL)
+    owner = models.ForeignKey(settings.AUTH_USER_MODEL, blank=True, null=True)
+    email = models.EmailField(blank=True, null=True)
+    name = models.CharField(max_length=100, blank=True)
     area = models.ForeignKey(Area)
     title = models.CharField(max_length=100)
     description = models.TextField(blank=True, null=True)
@@ -50,7 +52,9 @@ reversion.register(Event)
 
 class Story(TimeStampedModel):
     """ News story """
-    owner = models.OneToOneField(settings.AUTH_USER_MODEL)
+    owner = models.ForeignKey(settings.AUTH_USER_MODEL, blank=True, null=True)
+    email = models.EmailField(blank=True, null=True)
+    name = models.CharField(max_length=100, blank=True)
     area = models.ForeignKey(Area)
     title = models.CharField(max_length=100)
     description = models.TextField(blank=True, null=True)
