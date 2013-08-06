@@ -124,6 +124,7 @@ INSTALLED_APPS = (
     #'south',
     'base',
     'example',
+    'ilivehere',
     'login',
 )
 

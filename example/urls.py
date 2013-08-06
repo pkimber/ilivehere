@@ -19,6 +19,9 @@ urlpatterns = patterns(
         view=include(admin.site.urls)
         ),
     url(regex=r'^',
+        view=include('ilivehere.urls')
+        ),
+    url(regex=r'^',
         view=include('login.urls')
         ),
     url(r'^home/user/$',

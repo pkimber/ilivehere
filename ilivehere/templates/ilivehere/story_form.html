@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block title %}
+  Create a story
+{% endblock title %}
+
+{% block header %}
+  <h1>hatherleigh.net</h1>
+  <h2>Create a news story</h2>
+{% endblock header %}
+
+{% block content %}
+  <form action="{% url "ilivehere.story" %}" method="post" class="pure-form pure-form-aligned">
+    {% csrf_token %}
+    <fieldset>
+      {% for field in form %}
+        <div class="pure-control-group">
+          {{ field.errors }}
+          {{ field.label_tag }} {{ field }}
+        </div>
+      {% endfor %}
+      <div class="pure-controls">
+        <input type="submit" value="Submit" class="pure-button pure-button-primary" />
+      </div>
+    </fieldset>
+  </form>
+{% endblock content %}
