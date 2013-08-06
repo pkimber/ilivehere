@@ -1,4 +1,5 @@
 from django.conf import settings
+from django.core.urlresolvers import reverse
 from django.db import models
 
 import reversion
@@ -67,5 +68,8 @@ class Story(TimeStampedModel):
 
     def __unicode__(self):
         return unicode('{}'.format(self.title))
+
+    def get_absolute_url(self):
+        return reverse('ilivehere.story.detail', args=[self.pk])
 
 reversion.register(Story)

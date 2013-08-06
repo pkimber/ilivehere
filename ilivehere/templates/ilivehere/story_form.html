@@ -1,16 +1,16 @@
-{% extends "base.html" %}
+{% extends "ilivehere/base.html" %}
 
 {% block title %}
   Create a story
 {% endblock title %}
 
 {% block header %}
-  <h1>hatherleigh.net</h1>
-  <h2>Create a news story</h2>
+  <h1>Create a news story</h1>
+  {{ block.super }}
 {% endblock header %}
 
 {% block content %}
-  <form action="{% url "ilivehere.story" %}" method="post" class="pure-form pure-form-aligned">
+  <form action="{% url 'ilivehere.story.create' %}" method="post" class="pure-form pure-form-aligned">
     {% csrf_token %}
     <fieldset>
       {% for field in form %}

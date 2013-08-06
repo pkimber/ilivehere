@@ -1,15 +1,14 @@
 {% extends "ilivehere/base.html" %}
 
 {% block title %}
-  Home
+  Story
 {% endblock title %}
 
 {% block header %}
-  <h1>Home</h1>
+  <h1>News story</h1>
   {{ block.super }}
 {% endblock header %}
 
 {% block content %}
-  <h2>Testing</h2>
-  <a href="{% url 'ilivehere.story.create' %}">Create a news story...</a>
+  <p>{{ story.title }}</p>
 {% endblock content %}
