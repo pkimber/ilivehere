@@ -1,0 +1,8 @@
+Django==1.5.1
+fabric
+hgapi
+ipdb
+pytest-django
+pyyaml
+south
+walkdir
