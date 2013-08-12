@@ -15,7 +15,7 @@ has been created for you).
 ::
 
   mkvirtualenv dev_ilivehere
-  pip install -r requirements-dev.txt
+  pip install -r requirements/local.txt
 
   echo "export DJANGO_SETTINGS_MODULE=example.dev_patrick" >> $VIRTUAL_ENV/bin/postactivate
   echo "unset DJANGO_SETTINGS_MODULE" >> $VIRTUAL_ENV/bin/postdeactivate
@@ -77,11 +77,11 @@ To release the application:
 
 ::
 
-  fab -f ../../module/fabric/release.py dist
+  fab -f fabric/release.py dist_pypi:prefix=pkimber,url=http://pkimber.net/root/dev/
   hg push
 
 To check the contents of the distribution:
 
 ::
 
-  tar -ztvf dist/ilivehere-0.1.0.tar.gz
+  tar -ztvf dist/pkimber-ilivehere-0.1.0.tar.gz

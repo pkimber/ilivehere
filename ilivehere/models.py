@@ -59,6 +59,7 @@ class Story(TimeStampedModel):
     area = models.ForeignKey(Area)
     title = models.CharField(max_length=100)
     description = models.TextField(blank=True, null=True)
+    picture = models.ImageField(upload_to='story/%Y/%m/%d', blank=True)
     moderated = models.BooleanField(default=False)
 
     class Meta:

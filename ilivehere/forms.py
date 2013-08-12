@@ -1,9 +1,9 @@
-from django.forms import ModelForm
+from django import forms
 
 from .models import Story
 
 
-class StoryForm(ModelForm):
+class StoryForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super(StoryForm, self).__init__(*args, **kwargs)
@@ -14,4 +14,4 @@ class StoryForm(ModelForm):
 
     class Meta:
         model = Story
-        fields = ("name", "email", "area", "title", "description", )
+        fields = ("name", "email", "area", "title", "description", "picture")
