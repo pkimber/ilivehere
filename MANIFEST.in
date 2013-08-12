@@ -1,0 +1,8 @@
+recursive-include ilivehere/static *
+recursive-include ilivehere/templates *
+
+include LICENSE
+include README
+include *.txt
+
+prune example/
