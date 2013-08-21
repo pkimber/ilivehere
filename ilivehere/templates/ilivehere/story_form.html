@@ -1,34 +1,37 @@
 {% extends "ilivehere/base.html" %}
 
-{% block title %}
-  Create a story
-{% endblock title %}
+{% block sub_title %}
+  Create a news story
+{% endblock sub_title %}
 
-{% block header %}
-  <h1>Create a news story</h1>
-  {{ block.super }}
-{% endblock header %}
+{% block sub_heading %}
+  Create a news story
+{% endblock sub_heading %}
 
 {% block content %}
-  <form action="{% url 'ilivehere.story.create' %}" method="post" class="pure-form pure-form-stacked">
-    {% csrf_token %}
-    {{ form.non_field_errors }}
-    <fieldset>
-      {% for field in form %}
-        <div class="pure-control-group">
-          {{ field.label_tag }}
-          {% for error in field.errors %}
-            <aside class="pure-help-inline">{{ error }}</aside>
+  <div class="marketing-ribbon">
+    <div class="l-box">
+      <form action="{% url 'ilivehere.story.create' %}" method="post" class="pure-form pure-form-stacked">
+        {% csrf_token %}
+        {{ form.non_field_errors }}
+        <fieldset>
+          {% for field in form %}
+            <div class="pure-control-group">
+              {{ field.label_tag }}
+              {% for error in field.errors %}
+                <aside class="pure-help-inline">{{ error }}</aside>
+              {% endfor %}
+              {{ field }}
+            </div>
           {% endfor %}
-          {{ field }}
-        </div>
-      {% endfor %}
-      <div class="pure-controls">
-        <input type="submit" value="Submit" class="pure-button pure-button-primary" />
-      </div>
-    </fieldset>
-    {% for hidden in form.hidden_fields %}
-      {{ hidden }}
-    {% endfor %}
-  </form>
+          <div class="pure-controls">
+            <input type="submit" value="Submit" class="pure-button pure-button-primary" />
+          </div>
+        </fieldset>
+        {% for hidden in form.hidden_fields %}
+          {{ hidden }}
+        {% endfor %}
+      </form>
+    </div>
+  </div>
 {% endblock content %}

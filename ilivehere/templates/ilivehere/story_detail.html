@@ -1,14 +1,17 @@
 {% extends "ilivehere/base.html" %}
 
 {% block title %}
-  Story
+  News story
 {% endblock title %}
 
-{% block header %}
-  <h1>News story</h1>
-  {{ block.super }}
-{% endblock header %}
+{% block sub_heading %}
+  News story
+{% endblock sub_heading %}
 
 {% block content %}
-  <p>{{ story.title }}</p>
+  <div class="marketing-ribbon">
+    <div class="l-box">
+      <p>{{ story.title }}</p>
+    </div>
+  </div>
 {% endblock content %}

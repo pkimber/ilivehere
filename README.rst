@@ -69,19 +69,3 @@ Usage
   django-admin.py demo_data_login
   django-admin.py demo_data_ilivehere
   django-admin.py runserver
-
-Release
-=======
-
-To release the application:
-
-::
-
-  fab -f fabric/release.py dist:prefix=pkimber,pypirc=dev
-  git push -u origin master
-
-To check the contents of the distribution:
-
-::
-
-  tar -ztvf dist/pkimber-ilivehere-0.1.0.tar.gz
