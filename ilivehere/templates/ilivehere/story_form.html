@@ -9,29 +9,9 @@
 {% endblock sub_heading %}
 
 {% block content %}
-  <div class="marketing-ribbon">
-    <div class="l-box">
-      <form action="{% url 'ilivehere.story.create' %}" method="post" class="pure-form pure-form-stacked">
-        {% csrf_token %}
-        {{ form.non_field_errors }}
-        <fieldset>
-          {% for field in form %}
-            <div class="pure-control-group">
-              {{ field.label_tag }}
-              {% for error in field.errors %}
-                <aside class="pure-help-inline">{{ error }}</aside>
-              {% endfor %}
-              {{ field }}
-            </div>
-          {% endfor %}
-          <div class="pure-controls">
-            <input type="submit" value="Submit" class="pure-button pure-button-primary" />
-          </div>
-        </fieldset>
-        {% for hidden in form.hidden_fields %}
-          {{ hidden }}
-        {% endfor %}
-      </form>
+  <div class="pure-g-r">
+    <div class="pure-u-1">
+      {% include '_form.html' with legend='News' %}
     </div>
   </div>
 {% endblock content %}

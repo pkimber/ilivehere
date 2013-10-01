@@ -69,3 +69,8 @@ Usage
   django-admin.py demo_data_login
   django-admin.py demo_data_ilivehere
   django-admin.py runserver
+
+Release
+=======
+
+https://github.com/pkimber/cloud_docs

@@ -1,0 +1,36 @@
+{% extends "ilivehere/base.html" %}
+
+{% block title %}
+  News stories
+{% endblock title %}
+
+{% block sub_heading %}
+  News stories
+{% endblock sub_heading %}
+
+{% block content %}
+  <div class="pure-g-r">
+    <div class="pure-u-1">
+      <table class="pure-table pure-table-bordered">
+        <thead>
+          <tr>
+            <th>Area</th>
+            <th>Title</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for story in story_list %}
+            <tr valign="top">
+              <td>{{ story.area.name }}</td>
+              <td>
+                <a href="{% url 'ilivehere.story.detail' story.pk %}">
+                  {{ story.title }}
+                </a>
+              </td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+{% endblock content %}

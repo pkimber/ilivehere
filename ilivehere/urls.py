@@ -2,7 +2,11 @@ from django.conf.urls import (
     patterns, url
 )
 
-from .views import StoryCreateView, StoryDetailView
+from .views import (
+    StoryCreateView,
+    StoryDetailView,
+    StoryListView,
+)
 
 
 urlpatterns = patterns(
@@ -14,5 +18,9 @@ urlpatterns = patterns(
     url(regex=r'^story/(?P<pk>\d+)/$',
         view=StoryDetailView.as_view(),
         name='ilivehere.story.detail'
+        ),
+    url(regex=r'^story/$',
+        view=StoryListView.as_view(),
+        name='ilivehere.story.list'
         ),
 )
