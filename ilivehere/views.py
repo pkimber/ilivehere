@@ -4,11 +4,15 @@ from django.views.generic import (
     ListView,
 )
 
+from braces.views import (
+    LoginRequiredMixin,
+)
+
 from .forms import StoryForm
 from .models import Story
 
 
-class StoryCreateView(CreateView):
+class StoryCreateView(LoginRequiredMixin, CreateView):
     model = Story
     form_class = StoryForm
 
