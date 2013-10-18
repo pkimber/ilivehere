@@ -20,7 +20,7 @@
         on {{ story.created|date:"l d/m/y H:i" }}
         </small>
       </p>
-      {% include '_form.html' with legend='News' %}
+      {% include '_form.html' with legend='News' multipart=True %}
     </div>
   </div>
 {% endblock content %}
