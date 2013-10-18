@@ -5,6 +5,7 @@ from ilivehere.models import Story
 from ilivehere.tests.scenario import (
     default_scenario_ilivehere,
     get_area_hatherleigh,
+    get_story_craft_fair,
 )
 from login.tests.scenario import (
     default_scenario_login,
@@ -36,5 +37,17 @@ class TestViewStory(PermTestCase):
     def test_create_trust_perm(self):
         self.assert_staff_only(reverse('ilivehere.story.create.trust'))
 
+    def test_detail_perm(self):
+        story = get_story_craft_fair()
+        self.assert_staff_only(
+            reverse('ilivehere.story.detail', kwargs={'pk': story.pk})
+        )
+
     def test_list_perm(self):
         self.assert_staff_only(reverse('ilivehere.story.list'))
+
+    def test_update_perm(self):
+        story = get_story_craft_fair()
+        self.assert_staff_only(
+            reverse('ilivehere.story.update', kwargs={'pk': story.pk})
+        )
