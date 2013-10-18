@@ -14,18 +14,35 @@
       <table class="pure-table pure-table-bordered">
         <thead>
           <tr>
+            <th>ID</th>
+            <th>Created</th>
+            <th>Author</th>
             <th>Area</th>
             <th>Title</th>
+            <th>Moderated</th>
           </tr>
         </thead>
         <tbody>
           {% for story in story_list %}
             <tr valign="top">
+              <td>
+                <i class="icon-edit"></i>
+                {{ story.pk }}
+              </td>
+              <td>{{ story.created|date:"d/m/Y" }}</td>
+              <td>{{ story.author }}</td>
               <td>{{ story.area.name }}</td>
               <td>
                 <a href="{% url 'ilivehere.story.detail' story.pk %}">
                   {{ story.title }}
                 </a>
+              </td>
+              <td>
+                {% if story.moderated %}
+                  <i class="icon-check"></i>
+                {% else %}
+                  <i class="icon-check-empty"></i>
+                {% endif %}
               </td>
             </tr>
           {% endfor %}

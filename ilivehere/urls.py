@@ -12,13 +12,13 @@ from .views import (
 
 urlpatterns = patterns(
     '',
-    url(regex=r'^story/anon/add/$',
+    url(regex=r'^story/create/anon/$',
         view=StoryAnonCreateView.as_view(),
-        name='ilivehere.story.anon.create'
+        name='ilivehere.story.create.anon'
         ),
-    url(regex=r'^story/trust/add/$',
+    url(regex=r'^story/create/trust/$',
         view=StoryTrustCreateView.as_view(),
-        name='ilivehere.story.trust.create'
+        name='ilivehere.story.create.trust'
         ),
     url(regex=r'^story/(?P<pk>\d+)/$',
         view=StoryDetailView.as_view(),

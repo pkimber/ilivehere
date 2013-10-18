@@ -75,4 +75,8 @@ class Story(TimeStampedModel):
     def get_absolute_url(self):
         return reverse('ilivehere.story.detail', args=[self.pk])
 
+    def _author(self):
+        return self.name or self.user.username
+    author = property(_author)
+
 reversion.register(Story)
