@@ -1,5 +1,8 @@
+from django.contrib import messages
+from django.http import HttpResponseRedirect
 from django.views.generic import (
     CreateView,
+    DeleteView,
     DetailView,
     ListView,
     UpdateView
@@ -47,6 +50,28 @@ class StoryListView(
         LoginRequiredMixin, StaffuserRequiredMixin, BaseMixin, ListView):
 
     model = Story
+
+
+class StoryModerateView(
+        LoginRequiredMixin, StaffuserRequiredMixin, BaseMixin, DeleteView):
+
+    model = Story
+
+    def delete(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        self.object.set_moderated(self.request.user)
+        self.object.save()
+        messages.info(
+            self.request,
+            "Published story {}, {}".format(
+                self.object.pk,
+                self.object.title,
+            )
+        )
+        return HttpResponseRedirect(self.get_success_url())
+
+    def get_success_url(self):
+        return self.object.get_absolute_url()
 
 
 class StoryUpdateView(

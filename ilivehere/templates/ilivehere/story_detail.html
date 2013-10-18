@@ -11,18 +11,18 @@
 {% block content %}
   <div class="pure-g-r">
     <div class="pure-u-1">
-      <div class="pure-menu pure-menu-open pure-menu-horizontal">
-        <ul>
-          {% if not moderated %}
+      {% if not story.moderated %}
+        <div class="pure-menu pure-menu-open pure-menu-horizontal">
+          <ul>
             <li>
               <a href="{% url 'ilivehere.story.moderate' story.pk %}">
                 <i class="icon-thumbs-up"></i>
                 Publish
               </a>
             </li>
-          {% endif %}
-        </ul>
-      </div>
+          </ul>
+        </div>
+      {% endif %}
       <table class="pure-table pure-table-bordered">
         <tbody>
           <tr>
@@ -34,6 +34,15 @@
               </a>
             </td>
           </tr>
+          {% if story.moderated %}
+            <tr>
+              <td>Moderated</td>
+              <td>
+                {{ story.user_moderated }}
+                <small>on {{ story.date_moderated|date:"l d/m/y H:i" }}</small>
+              </td>
+            </tr>
+          {% endif %}
           <tr>
             <td>Author</td>
             <td>{{ story.author }}</td>

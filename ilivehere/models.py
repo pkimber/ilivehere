@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from django.conf import settings
 from django.core.urlresolvers import reverse
 from django.db import models
@@ -29,7 +31,10 @@ class Event(TimeStampedModel):
     area = models.ForeignKey(Area)
     title = models.CharField(max_length=100)
     description = models.TextField(blank=True, null=True)
-    moderated = models.BooleanField(default=False)
+    date_moderated = models.DateTimeField(blank=True, null=True)
+    user_moderated = models.ForeignKey(
+        settings.AUTH_USER_MODEL, blank=True, null=True, related_name='+'
+    )
 
     class Meta:
         ordering = ['modified']
@@ -51,7 +56,10 @@ class Story(TimeStampedModel):
     title = models.CharField(max_length=100)
     description = models.TextField()
     picture = models.ImageField(upload_to='story/%Y/%m/%d', blank=True)
-    moderated = models.BooleanField(default=False)
+    date_moderated = models.DateTimeField(blank=True, null=True)
+    user_moderated = models.ForeignKey(
+        settings.AUTH_USER_MODEL, blank=True, null=True, related_name='+'
+    )
 
     class Meta:
         ordering = ['-created']
@@ -75,8 +83,16 @@ class Story(TimeStampedModel):
     def get_absolute_url(self):
         return reverse('ilivehere.story.detail', args=[self.pk])
 
+    def set_moderated(self, user):
+        self.date_moderated = datetime.now()
+        self.user_moderated = user
+
     def _author(self):
         return self.name or self.user.username
     author = property(_author)
+
+    def _moderated(self):
+        return bool(self.date_moderated)
+    moderated = property(_moderated)
 
 reversion.register(Story)

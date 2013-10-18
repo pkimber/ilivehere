@@ -6,6 +6,7 @@ from .views import (
     StoryAnonCreateView,
     StoryDetailView,
     StoryListView,
+    StoryModerateView,
     StoryTrustCreateView,
     StoryUpdateView,
 )
@@ -30,7 +31,7 @@ urlpatterns = patterns(
         name='ilivehere.story.list'
         ),
     url(regex=r'^story/(?P<pk>\d+)/approve/$',
-        view=StoryUpdateView.as_view(),
+        view=StoryModerateView.as_view(),
         name='ilivehere.story.moderate'
         ),
     url(regex=r'^story/(?P<pk>\d+)/edit/$',

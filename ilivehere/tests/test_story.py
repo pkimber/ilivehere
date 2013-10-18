@@ -6,6 +6,7 @@ from ilivehere.tests.model_maker import (
 from ilivehere.tests.scenario import (
     default_scenario_ilivehere,
     get_area_hatherleigh,
+    get_story_craft_fair,
 )
 from login.tests.scenario import (
     default_scenario_login,
@@ -44,3 +45,9 @@ class TestStory(TestCase):
             title='Alpha Male',
             description='completed their 300 mile paddle',
         )
+
+    def test_set_moderated(self):
+        story = get_story_craft_fair()
+        story.set_moderated(get_user_staff())
+        story.save()
+        self.assertTrue(get_story_craft_fair().moderated)
