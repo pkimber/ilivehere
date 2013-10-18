@@ -1,5 +1,7 @@
 {% extends "ilivehere/base.html" %}
 
+{% load thumbnail %}
+
 {% block sub_title %}
   News story
 {% endblock sub_title %}
@@ -60,6 +62,13 @@
       <br />
       {{ story.description }}
       {% if story.picture %}
+        <br />
+        <br />
+        thumbnail
+        <br />
+        <img src="{% thumbnail story.picture 100x100 crop %}" />
+        <br />
+        picture
         <br />
         <img src="{{ story.picture.url }}" />
       {% endif %}

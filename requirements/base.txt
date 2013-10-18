@@ -3,5 +3,6 @@ django-registration==1.0
 django-reversion==1.7.1
 django-sendfile
 django==1.5.4
+easy-thumbnails
 pillow
 south
