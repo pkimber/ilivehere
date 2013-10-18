@@ -1,4 +1,5 @@
 from django.conf import settings
+from django.core.exceptions import ValidationError
 from django.core.urlresolvers import reverse
 from django.db import models
 
@@ -62,6 +63,16 @@ class Story(TimeStampedModel):
 
     def __unicode__(self):
         return unicode('{}'.format(self.title))
+
+    def clean(self):
+        if self.user:
+            pass
+        elif self.email and self.name:
+            pass
+        else:
+            raise ValidationError(
+                "Please enter your name and email address"
+            )
 
     def get_absolute_url(self):
         return reverse('ilivehere.story.detail', args=[self.pk])
