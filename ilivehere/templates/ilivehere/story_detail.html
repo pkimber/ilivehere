@@ -59,8 +59,10 @@
       </table>
       <br />
       {{ story.description }}
-      <br />
-      <img src="{{ story.picture.url }}" />
+      {% if story.picture %}
+        <br />
+        <img src="{{ story.picture.url }}" />
+      {% endif %}
     </div>
   </div>
 {% endblock content %}
