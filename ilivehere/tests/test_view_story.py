@@ -1,22 +1,26 @@
 from django.core.urlresolvers import reverse
-from django.test import TestCase
 
+from base.tests.test_utils import PermTestCase
 from ilivehere.models import Story
 from ilivehere.tests.scenario import (
     default_scenario_ilivehere,
     get_area_hatherleigh,
 )
+from login.tests.scenario import (
+    default_scenario_login,
+)
 
 
-class TestViewStory(TestCase):
+class TestViewStory(PermTestCase):
 
-    def test_create_anon_get(self):
-        url = reverse('ilivehere.story.create.anon')
-        response = self.client.get(url)
-        self.assertEqual(response.status_code, 200)
+    def setUp(self):
+        default_scenario_login()
+        default_scenario_ilivehere()
+
+    def test_create_anon(self):
+        self.assert_any(reverse('ilivehere.story.create.anon'))
 
     def test_create_anon_post(self):
-        default_scenario_ilivehere()
         url = reverse('ilivehere.story.create.anon')
         data = dict(
             name='Patrick',
@@ -28,3 +32,9 @@ class TestViewStory(TestCase):
         response = self.client.post(url, data)
         self.assertEqual(response.status_code, 302)
         Story.objects.get(name='Patrick')
+
+    def test_create_trust_perm(self):
+        self.assert_staff_only(reverse('ilivehere.story.create.trust'))
+
+    def test_list_perm(self):
+        self.assert_staff_only(reverse('ilivehere.story.list'))

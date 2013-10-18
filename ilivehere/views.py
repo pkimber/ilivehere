@@ -7,6 +7,7 @@ from django.views.generic import (
 
 from braces.views import (
     LoginRequiredMixin,
+    StaffuserRequiredMixin,
 )
 
 from .forms import (
@@ -15,16 +16,18 @@ from .forms import (
     StoryUpdateForm,
 )
 from .models import Story
+from base.view_utils import BaseMixin
 
 
-class StoryAnonCreateView(CreateView):
+class StoryAnonCreateView(BaseMixin, CreateView):
 
     model = Story
     form_class = StoryAnonForm
     template_name = 'ilivehere/story_create_form.html'
 
 
-class StoryTrustCreateView(LoginRequiredMixin, CreateView):
+class StoryTrustCreateView(
+        LoginRequiredMixin, StaffuserRequiredMixin, BaseMixin, CreateView):
 
     model = Story
     form_class = StoryTrustForm
@@ -36,15 +39,19 @@ class StoryTrustCreateView(LoginRequiredMixin, CreateView):
         return super(StoryTrustCreateView, self).form_valid(form)
 
 
-class StoryDetailView(DetailView):
+class StoryDetailView(
+        LoginRequiredMixin, StaffuserRequiredMixin, BaseMixin, DetailView):
     model = Story
 
 
-class StoryListView(LoginRequiredMixin, ListView):
+class StoryListView(
+        LoginRequiredMixin, StaffuserRequiredMixin, BaseMixin, ListView):
+
     model = Story
 
 
-class StoryUpdateView(LoginRequiredMixin, UpdateView):
+class StoryUpdateView(
+        LoginRequiredMixin, StaffuserRequiredMixin, BaseMixin, UpdateView):
 
     model = Story
     form_class = StoryUpdateForm
