@@ -33,7 +33,9 @@ urlpatterns = patterns(
         view=RedirectView.as_view(url=reverse_lazy('project.home')),
         name='project.home.user'
         ),
-) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+)
+
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 #   ^ helper function to return a URL pattern for serving files in debug mode.
 # https://docs.djangoproject.com/en/1.5/howto/static-files/#serving-files-uploaded-by-a-user
 
