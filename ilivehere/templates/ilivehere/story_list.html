@@ -15,7 +15,6 @@
         <thead>
           <tr>
             <th>ID</th>
-            <th>Created</th>
             <th>Author</th>
             <th>Area</th>
             <th>Title</th>
@@ -26,11 +25,15 @@
           {% for story in story_list %}
             <tr valign="top">
               <td>
-                <i class="icon-edit"></i>
-                {{ story.pk }}
+                <a href="{% url "ilivehere.story.update" story.pk %}">
+                  <i class="icon-edit"></i>
+                  {{ story.pk }}
+                </a>
               </td>
-              <td>{{ story.created|date:"d/m/Y" }}</td>
-              <td>{{ story.author }}</td>
+              <td>
+                {{ story.author }}
+                <small>on {{ story.created|date:"d/m/Y" }}</small>
+              </td>
               <td>{{ story.area.name }}</td>
               <td>
                 <a href="{% url 'ilivehere.story.detail' story.pk %}">

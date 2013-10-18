@@ -15,14 +15,17 @@ urlpatterns = patterns(
         view=HomeView.as_view(),
         name='project.home'
         ),
+    url(regex=r'^',
+        view=include('login.urls')
+        ),
+    url(regex=r'^accounts/',
+        view=include('registration.backends.default.urls')
+        ),
     url(regex=r'^admin/',
         view=include(admin.site.urls)
         ),
     url(regex=r'^',
         view=include('ilivehere.urls')
-        ),
-    url(regex=r'^',
-        view=include('login.urls')
         ),
     url(r'^home/user/$',
         view=RedirectView.as_view(url=reverse_lazy('project.home')),

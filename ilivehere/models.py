@@ -54,7 +54,7 @@ class Story(TimeStampedModel):
     moderated = models.BooleanField(default=False)
 
     class Meta:
-        ordering = ['modified']
+        ordering = ['-created']
         verbose_name = 'Story'
         verbose_name_plural = 'Stories'
 

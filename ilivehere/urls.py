@@ -7,6 +7,7 @@ from .views import (
     StoryDetailView,
     StoryListView,
     StoryTrustCreateView,
+    StoryUpdateView,
 )
 
 
@@ -27,5 +28,9 @@ urlpatterns = patterns(
     url(regex=r'^story/$',
         view=StoryListView.as_view(),
         name='ilivehere.story.list'
+        ),
+    url(regex=r'^story/(?P<pk>\d+)/edit/$',
+        view=StoryUpdateView.as_view(),
+        name='ilivehere.story.update'
         ),
 )

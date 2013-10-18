@@ -1,15 +1,44 @@
 {% extends "ilivehere/base.html" %}
+{% load staticfiles %}
 
-{% block title %}
+{% block sub_title %}
   Home
-{% endblock title %}
+{% endblock sub_title %}
 
-{% block header %}
-  <h1>Home</h1>
-  {{ block.super }}
-{% endblock header %}
+{% block sub_heading %}
+  Home
+{% endblock sub_heading %}
 
 {% block content %}
-  <h2>Testing</h2>
-  <a href="{% url 'ilivehere.story.create' %}">Create a news story...</a>
+  <div class="pure-g-r">
+    <div class="pure-u-1">
+      <div class="pure-menu pure-menu-open pure-menu-horizontal">
+        <ul>
+          {% if user.is_staff %}
+            <li>
+              <a href="{% url 'ilivehere.story.create.trust' %}">
+                <i class="icon-edit"></i>
+                Create news
+              </a>
+            </li>
+            <li>
+              <a href="{% url 'ilivehere.story.list' %}">
+                <i class="icon-list"></i>
+                List news
+              </a>
+            </li>
+          {% else %}
+            <li>
+              <a href="{% url 'ilivehere.story.create.anon' %}">
+                <i class="icon-edit"></i>
+                Create news
+              </a>
+            </li>
+          {% endif %}
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
 {% endblock content %}
+
