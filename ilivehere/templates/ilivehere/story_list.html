@@ -15,9 +15,9 @@
         <thead>
           <tr>
             <th>ID</th>
-            <th>Author</th>
-            <th>Area</th>
             <th>Title</th>
+            <th>Area</th>
+            <th>Author</th>
             <th>Moderated</th>
           </tr>
         </thead>
@@ -31,18 +31,19 @@
                 </a>
               </td>
               <td>
-                {{ story.author }}
-                <small>on {{ story.created|date:"d/m/Y" }}</small>
-              </td>
-              <td>{{ story.area.name }}</td>
-              <td>
                 <a href="{% url 'ilivehere.story.detail' story.pk %}">
                   {{ story.title }}
                 </a>
               </td>
+              <td>{{ story.area.name }}</td>
+              <td>
+                {{ story.author }}
+                <small> {{ story.created|date:"d/m/Y" }}</small>
+              </td>
               <td>
                 {% if story.moderated %}
                   <i class="icon-check"></i>
+                  <small>{{ story.date_moderated|date:"d/m/y" }}</small>
                 {% else %}
                   <i class="icon-check-empty"></i>
                 {% endif %}
