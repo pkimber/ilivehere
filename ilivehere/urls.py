@@ -3,17 +3,22 @@ from django.conf.urls import (
 )
 
 from .views import (
-    StoryCreateView,
+    StoryAnonCreateView,
     StoryDetailView,
     StoryListView,
+    StoryTrustCreateView,
 )
 
 
 urlpatterns = patterns(
     '',
-    url(regex=r'^story/add/$',
-        view=StoryCreateView.as_view(),
-        name='ilivehere.story.create'
+    url(regex=r'^story/anon/add/$',
+        view=StoryAnonCreateView.as_view(),
+        name='ilivehere.story.anon.create'
+        ),
+    url(regex=r'^story/trust/add/$',
+        view=StoryTrustCreateView.as_view(),
+        name='ilivehere.story.trust.create'
         ),
     url(regex=r'^story/(?P<pk>\d+)/$',
         view=StoryDetailView.as_view(),

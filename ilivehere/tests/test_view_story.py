@@ -3,13 +3,15 @@ from django.test import TestCase
 
 from ilivehere.models import Story
 from ilivehere.tests.model_maker import make_area
+from ilivehere.tests.scenario import default_scenario_ilivehere
 
 
-class TestStoryCreate(TestCase):
+class TestViewStory(TestCase):
 
     def test_create(self):
+        default_scenario_ilivehere()
         area = make_area('Hatherleigh')
-        url = reverse('ilivehere.story.create')
+        url = reverse('ilivehere.story.anon.create')
         data = dict(
             name='Patrick',
             email='code@pkimber.net',

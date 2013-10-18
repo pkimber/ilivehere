@@ -43,8 +43,10 @@ reversion.register(Event)
 
 
 class Story(TimeStampedModel):
-    """ News story """
-    owner = models.ForeignKey(settings.AUTH_USER_MODEL, blank=True, null=True)
+    """
+    News story
+    """
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, blank=True, null=True)
     email = models.EmailField(blank=True, null=True)
     name = models.CharField(max_length=100, blank=True)
     area = models.ForeignKey(Area)

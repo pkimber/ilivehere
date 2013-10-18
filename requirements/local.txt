@@ -7,5 +7,4 @@ hgapi
 psycopg2
 pytest-django
 pyyaml
-south
 walkdir

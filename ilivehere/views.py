@@ -12,7 +12,12 @@ from .forms import StoryForm
 from .models import Story
 
 
-class StoryCreateView(LoginRequiredMixin, CreateView):
+class StoryAnonCreateView(CreateView):
+    model = Story
+    form_class = StoryForm
+
+
+class StoryTrustCreateView(LoginRequiredMixin, CreateView):
     model = Story
     form_class = StoryForm
 
