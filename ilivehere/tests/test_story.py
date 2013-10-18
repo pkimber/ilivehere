@@ -1,4 +1,3 @@
-from django.core.exceptions import ValidationError
 from django.test import TestCase
 
 from ilivehere.tests.model_maker import (
@@ -39,7 +38,7 @@ class TestStory(TestCase):
 
     def test_create_no_user_or_name(self):
         self.assertRaises(
-            ValidationError,
+            ValueError,
             make_story,
             area=get_area_hatherleigh(),
             title='Alpha Male',

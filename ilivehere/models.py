@@ -1,5 +1,4 @@
 from django.conf import settings
-from django.core.exceptions import ValidationError
 from django.core.urlresolvers import reverse
 from django.db import models
 
@@ -44,15 +43,13 @@ reversion.register(Event)
 
 
 class Story(TimeStampedModel):
-    """
-    News story
-    """
+    """News story"""
     user = models.ForeignKey(settings.AUTH_USER_MODEL, blank=True, null=True)
     email = models.EmailField(blank=True, null=True)
     name = models.CharField(max_length=100, blank=True)
     area = models.ForeignKey(Area)
     title = models.CharField(max_length=100)
-    description = models.TextField(blank=True, null=True)
+    description = models.TextField()
     picture = models.ImageField(upload_to='story/%Y/%m/%d', blank=True)
     moderated = models.BooleanField(default=False)
 
@@ -64,15 +61,16 @@ class Story(TimeStampedModel):
     def __unicode__(self):
         return unicode('{}'.format(self.title))
 
-    def clean(self):
+    def save(self, *args, **kwargs):
         if self.user:
             pass
         elif self.email and self.name:
             pass
         else:
-            raise ValidationError(
-                "Please enter your name and email address"
+            raise ValueError(
+                "Story must have a 'user' or a 'name' AND 'email'"
             )
+        super(Story, self).save(*args, **kwargs)
 
     def get_absolute_url(self):
         return reverse('ilivehere.story.detail', args=[self.pk])
