@@ -12,8 +12,10 @@
   <div class="pure-g-r">
     <div class="pure-u-1">
       <p>
-        Created by {{ story.name }}
-        {{ story.email|urlize }}
+        Created by {{ story.author }}
+        {% if story.email %}
+          {{ story.email|urlize }}
+        {% endif %}
         <small>
         on {{ story.created|date:"l d/m/y H:i" }}
         </small>

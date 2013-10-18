@@ -13,7 +13,6 @@ from braces.views import (
 from .forms import (
     StoryAnonForm,
     StoryTrustForm,
-    StoryUpdateForm,
 )
 from .models import Story
 from base.view_utils import BaseMixin
@@ -54,5 +53,5 @@ class StoryUpdateView(
         LoginRequiredMixin, StaffuserRequiredMixin, BaseMixin, UpdateView):
 
     model = Story
-    form_class = StoryUpdateForm
+    form_class = StoryTrustForm
     template_name = 'ilivehere/story_update_form.html'

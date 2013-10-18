@@ -120,7 +120,7 @@ INSTALLED_APPS = (
     # 'django.contrib.admindocs',
     'registration',
     'reversion',
-    #'south',
+    'south',
     'base',
     'example',
     'ilivehere',

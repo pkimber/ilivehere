@@ -46,6 +46,12 @@ class TestViewStory(PermTestCase):
     def test_list_perm(self):
         self.assert_staff_only(reverse('ilivehere.story.list'))
 
+    def test_moderate_perm(self):
+        story = get_story_craft_fair()
+        self.assert_staff_only(
+            reverse('ilivehere.story.moderate', kwargs={'pk': story.pk})
+        )
+
     def test_update_perm(self):
         story = get_story_craft_fair()
         self.assert_staff_only(

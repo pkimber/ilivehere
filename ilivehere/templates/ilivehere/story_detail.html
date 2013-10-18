@@ -5,13 +5,51 @@
 {% endblock title %}
 
 {% block sub_heading %}
-  News story {{ story.title }}</p>
+  {{ story.title }}</p>
 {% endblock sub_heading %}
 
 {% block content %}
   <div class="pure-g-r">
     <div class="pure-u-1">
-      <p>{{ story.title }}</p>
+      <div class="pure-menu pure-menu-open pure-menu-horizontal">
+        <ul>
+          {% if not moderated %}
+            <li>
+              <a href="{% url 'ilivehere.story.moderate' story.pk %}">
+                <i class="icon-thumbs-up"></i>
+                Publish
+              </a>
+            </li>
+          {% endif %}
+        </ul>
+      </div>
+      <table class="pure-table pure-table-bordered">
+        <tbody>
+          <tr>
+            <td>Title</td>
+            <td>
+              <a href="{% url "ilivehere.story.update" story.pk %}">
+                <i class="icon-edit"></i>
+                {{ story.title }}
+              </a>
+            </td>
+          </tr>
+          <tr>
+            <td>Author</td>
+            <td>{{ story.author }}</td>
+          </tr>
+          <tr>
+            <td>Created</td>
+            <td>{{ story.created|date:"l d/m/y H:i" }}</td>
+          </tr>
+          <tr>
+            <td>Area</td>
+            <td>{{ story.area.name }}</td>
+          </tr>
+        </tbody>
+      </table>
+      <br />
+      {{ story.description }}
     </div>
   </div>
 {% endblock content %}

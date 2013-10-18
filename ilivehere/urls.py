@@ -29,6 +29,10 @@ urlpatterns = patterns(
         view=StoryListView.as_view(),
         name='ilivehere.story.list'
         ),
+    url(regex=r'^story/(?P<pk>\d+)/approve/$',
+        view=StoryUpdateView.as_view(),
+        name='ilivehere.story.moderate'
+        ),
     url(regex=r'^story/(?P<pk>\d+)/edit/$',
         view=StoryUpdateView.as_view(),
         name='ilivehere.story.update'

@@ -43,19 +43,3 @@ class StoryTrustForm(RequiredFieldForm):
     class Meta:
         model = Story
         fields = ('area', 'title', 'description', 'picture')
-
-
-class StoryUpdateForm(RequiredFieldForm):
-
-    def __init__(self, *args, **kwargs):
-        super(StoryUpdateForm, self).__init__(*args, **kwargs)
-        self.fields['title'].widget.attrs.update(
-            {'class': 'pure-input-2-3'}
-        )
-        self.fields['description'].widget.attrs.update(
-            {'class': 'pure-input-2-3'}
-        )
-
-    class Meta:
-        model = Story
-        fields = ('moderated', 'area', 'title', 'description', 'picture')
