@@ -25,7 +25,7 @@ def get_story_craft_fair():
 
 
 def get_story_market_fire():
-    return Story.objects.get(title='Hatherleigh Market on Fire')
+    return Story.objects.get(title='Market Offices burnt down')
 
 
 def default_scenario_ilivehere():
@@ -45,9 +45,15 @@ def default_scenario_ilivehere():
     make_story(
         user=get_user_web(),
         area=get_area_hatherleigh(),
-        title='Hatherleigh Market on Fire',
+        title='Market Offices burnt down',
         description=(
-            "Fire engines were called to Hatherleigh on Monday morning."
+            "The market offices burnt down last night. I am sure theories "
+            "will abound around the town, but we will have to wait until the "
+            "Police have done their bit, before we will know. The offices "
+            "and files held within seam to have been totalled destroyed. "
+            "Tomorrow's Market should go ahead although the auction will "
+            "NOT take place, but the stallholders hopefully will be selling "
+            "their wares"
         )
     )
     make_story(
