@@ -43,6 +43,18 @@ class StoryAnonCreateView(BaseMixin, CreateView):
     form_class = StoryAnonForm
     template_name = 'ilivehere/story_create_form.html'
 
+    def get_context_data(self, **kwargs):
+        """
+        If a user is logged in (and active), they shouldn't be using this
+        view!
+        We don't do anything with the context... but it is a good place to
+        check some stuff.
+        """
+        context = super(StoryAnonCreateView, self).get_context_data(**kwargs)
+        if self.request.user and self.request.user.is_active:
+            raise PermissionDenied()
+        return context
+
 
 class StoryTrustCreateView(
         LoginRequiredMixin, BaseMixin, CreateView):
@@ -50,6 +62,17 @@ class StoryTrustCreateView(
     model = Story
     form_class = StoryTrustForm
     template_name = 'ilivehere/story_create_form.html'
+
+    def get_context_data(self, **kwargs):
+        """
+        This view is for users who are logged in and active.
+        We don't do anything with the context... but it is a good place to
+        check some stuff.
+        """
+        context = super(StoryTrustCreateView, self).get_context_data(**kwargs)
+        if not self.request.user and self.request.user.is_active:
+            raise PermissionDenied()
+        return context
 
     def form_valid(self, form):
         self.object = form.save(commit=False)
@@ -81,6 +104,10 @@ class StoryListView(
 
 class StoryModerateView(
         LoginRequiredMixin, StaffuserRequiredMixin, BaseMixin, DeleteView):
+    """
+    TODO should this be an update view with an empty form?  Might be safer
+    than using a delete view
+    """
 
     model = Story
 

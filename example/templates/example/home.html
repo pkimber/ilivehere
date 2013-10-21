@@ -14,7 +14,7 @@
     <div class="pure-u-1">
       <div class="pure-menu pure-menu-open pure-menu-horizontal">
         <ul>
-          {% if user.is_staff %}
+          {% if user.is_active %}
             <li>
               <a href="{% url 'ilivehere.story.create.trust' %}">
                 <i class="icon-edit"></i>
