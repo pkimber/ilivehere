@@ -13,17 +13,19 @@
 {% block content %}
   <div class="pure-g-r">
     <div class="pure-u-1">
-      {% if not story.moderated %}
-        <div class="pure-menu pure-menu-open pure-menu-horizontal">
-          <ul>
-            <li>
-              <a href="{% url 'ilivehere.story.moderate' story.pk %}">
-                <i class="icon-thumbs-up"></i>
-                Publish
-              </a>
-            </li>
-          </ul>
-        </div>
+      {% if user.is_staff %}
+        {% if not story.moderated %}
+          <div class="pure-menu pure-menu-open pure-menu-horizontal">
+            <ul>
+              <li>
+                <a href="{% url 'ilivehere.story.moderate' story.pk %}">
+                  <i class="icon-thumbs-up"></i>
+                  Publish
+                </a>
+              </li>
+            </ul>
+          </div>
+        {% endif %}
       {% endif %}
       <table class="pure-table pure-table-bordered">
         <tbody>
