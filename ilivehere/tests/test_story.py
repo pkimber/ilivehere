@@ -7,10 +7,12 @@ from ilivehere.tests.scenario import (
     default_scenario_ilivehere,
     get_area_hatherleigh,
     get_story_craft_fair,
+    get_story_market_fire,
 )
 from login.tests.scenario import (
     default_scenario_login,
     get_user_staff,
+    get_user_web,
     user_contractor,
 )
 
@@ -21,6 +23,22 @@ class TestStory(TestCase):
         default_scenario_login()
         user_contractor()
         default_scenario_ilivehere()
+
+    def test_can_edit(self):
+        """
+        A story can be edited by the person who created it (or a member of
+        staff).
+        """
+        story = get_story_market_fire()
+        self.assertTrue(story.user_can_edit(get_user_web()))
+
+    def test_can_edit_not(self):
+        """
+        A story can only be edited by the person who created it (or a member
+        of staff).  The craft fair story was created by an anonymous user.
+        """
+        story = get_story_craft_fair()
+        self.assertFalse(story.user_can_edit(get_user_web()))
 
     def test_create_anon(self):
         make_story(

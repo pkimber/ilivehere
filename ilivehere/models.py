@@ -87,6 +87,18 @@ class Story(TimeStampedModel):
         self.date_moderated = datetime.now()
         self.user_moderated = user
 
+    def user_can_edit(self, user):
+        """
+        A member of staff can edit anything.  A standard user can only edit
+        their own stories if they haven't been moderated
+        """
+        result = False
+        if user.is_staff:
+            result = True
+        elif user.is_active and not self.date_moderated:
+            result = user == self.user
+        return result
+
     def _author(self):
         return self.name or self.user.username
     author = property(_author)

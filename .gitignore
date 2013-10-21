@@ -9,6 +9,7 @@
 dist
 build
 eggs
+media
 parts
 bin
 var
@@ -35,3 +36,4 @@ temp.db
 .mr.developer.cfg
 .project
 .pydevproject
+.ropeproject
