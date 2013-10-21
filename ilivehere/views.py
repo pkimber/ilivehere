@@ -85,10 +85,13 @@ class StoryDetailView(
 
     model = Story
 
-    def get_object(self, *args, **kwargs):
-        obj = super(StoryDetailView, self).get_object(*args, **kwargs)
-        self._check_perm(obj)
-        return obj
+    def get_context_data(self, **kwargs):
+        context = super(StoryDetailView, self).get_context_data(**kwargs)
+        self._check_perm(self.object)
+        context.update(dict(
+            user_can_edit=self.object.user_can_edit(self.request.user),
+        ))
+        return context
 
 
 class StoryListView(
@@ -138,4 +141,6 @@ class StoryUpdateView(
     def get_object(self, *args, **kwargs):
         obj = super(StoryUpdateView, self).get_object(*args, **kwargs)
         self._check_perm(obj)
+        if not obj.user_can_edit(self.request.user):
+            raise PermissionDenied()
         return obj

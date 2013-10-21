@@ -25,10 +25,7 @@
           {% for story in story_list %}
             <tr valign="top">
               <td>
-                <a href="{% url "ilivehere.story.update" story.pk %}">
-                  <i class="icon-edit"></i>
-                  {{ story.pk }}
-                </a>
+                {{ story.pk }}
               </td>
               <td>
                 <a href="{% url 'ilivehere.story.detail' story.pk %}">

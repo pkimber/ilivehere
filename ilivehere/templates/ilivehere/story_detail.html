@@ -32,10 +32,14 @@
           <tr>
             <td>Title</td>
             <td>
-              <a href="{% url "ilivehere.story.update" story.pk %}">
-                <i class="icon-edit"></i>
+              {% if user_can_edit %}
+                <a href="{% url "ilivehere.story.update" story.pk %}">
+                  <i class="icon-edit"></i>
+                  {{ story.title }}
+                </a>
+              {% else %}
                 {{ story.title }}
-              </a>
+              {% endif %}
             </td>
           </tr>
           {% if story.moderated %}
