@@ -11,6 +11,7 @@ from ilivehere.tests.scenario import (
 from login.tests.scenario import (
     default_scenario_login,
     get_user_staff,
+    user_contractor,
 )
 
 
@@ -18,6 +19,7 @@ class TestStory(TestCase):
 
     def setUp(self):
         default_scenario_login()
+        user_contractor()
         default_scenario_ilivehere()
 
     def test_create_anon(self):

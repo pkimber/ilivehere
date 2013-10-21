@@ -8,6 +8,7 @@ from ilivehere.tests.model_maker import (
 )
 from login.tests.scenario import (
     get_user_staff,
+    get_user_web,
 )
 
 
@@ -23,6 +24,10 @@ def get_story_craft_fair():
     return Story.objects.get(title='Craft Fair')
 
 
+def get_story_market_fire():
+    return Story.objects.get(title='Hatherleigh Market on Fire')
+
+
 def default_scenario_ilivehere():
     make_area('Hatherleigh')
     make_area('Exbourne')
@@ -35,6 +40,14 @@ def default_scenario_ilivehere():
             "Tuesday, to join the crowds at Hatherleigh Market. They came "
             "to visit Martin at the Hatherleigh Fish Bar. Martin the owner "
             "of the bar also has two MGs."
+        )
+    )
+    make_story(
+        user=get_user_web(),
+        area=get_area_hatherleigh(),
+        title='Hatherleigh Market on Fire',
+        description=(
+            "Fire engines were called to Hatherleigh on Monday morning."
         )
     )
     make_story(

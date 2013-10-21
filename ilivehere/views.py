@@ -1,4 +1,5 @@
 from django.contrib import messages
+from django.core.exceptions import PermissionDenied
 from django.http import HttpResponseRedirect
 from django.views.generic import (
     CreateView,
@@ -21,6 +22,21 @@ from .models import Story
 from base.view_utils import BaseMixin
 
 
+def check_perm(user, story):
+    """user must be a member of staff or have created the story"""
+    if user.is_staff:
+        pass
+    elif not story.user == user:
+        # the user did not create the story
+        raise PermissionDenied()
+
+
+class CheckPermMixin(object):
+
+    def _check_perm(self, story):
+        check_perm(self.request.user, story)
+
+
 class StoryAnonCreateView(BaseMixin, CreateView):
 
     model = Story
@@ -29,7 +45,7 @@ class StoryAnonCreateView(BaseMixin, CreateView):
 
 
 class StoryTrustCreateView(
-        LoginRequiredMixin, StaffuserRequiredMixin, BaseMixin, CreateView):
+        LoginRequiredMixin, BaseMixin, CreateView):
 
     model = Story
     form_class = StoryTrustForm
@@ -42,14 +58,25 @@ class StoryTrustCreateView(
 
 
 class StoryDetailView(
-        LoginRequiredMixin, StaffuserRequiredMixin, BaseMixin, DetailView):
+        LoginRequiredMixin, CheckPermMixin, BaseMixin, DetailView):
+
     model = Story
+
+    def get_object(self, *args, **kwargs):
+        obj = super(StoryDetailView, self).get_object(*args, **kwargs)
+        self._check_perm(obj)
+        return obj
 
 
 class StoryListView(
-        LoginRequiredMixin, StaffuserRequiredMixin, BaseMixin, ListView):
+        LoginRequiredMixin, BaseMixin, ListView):
 
-    model = Story
+    def get_queryset(self):
+        if self.request.user.is_staff:
+            result = Story.objects.all()
+        else:
+            result = Story.objects.filter(user=self.request.user)
+        return result
 
 
 class StoryModerateView(
@@ -75,8 +102,13 @@ class StoryModerateView(
 
 
 class StoryUpdateView(
-        LoginRequiredMixin, StaffuserRequiredMixin, BaseMixin, UpdateView):
+        LoginRequiredMixin, CheckPermMixin, BaseMixin, UpdateView):
 
     model = Story
     form_class = StoryTrustForm
     template_name = 'ilivehere/story_update_form.html'
+
+    def get_object(self, *args, **kwargs):
+        obj = super(StoryUpdateView, self).get_object(*args, **kwargs)
+        self._check_perm(obj)
+        return obj
