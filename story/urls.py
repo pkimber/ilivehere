@@ -14,27 +14,27 @@ from .views import (
 
 urlpatterns = patterns(
     '',
-    url(regex=r'^story/create/anon/$',
+    url(regex=r'^create/anon/$',
         view=StoryAnonCreateView.as_view(),
         name='story.create.anon'
         ),
-    url(regex=r'^story/create/trust/$',
+    url(regex=r'^create/trust/$',
         view=StoryTrustCreateView.as_view(),
         name='story.create.trust'
         ),
-    url(regex=r'^story/(?P<pk>\d+)/$',
+    url(regex=r'^(?P<pk>\d+)/$',
         view=StoryDetailView.as_view(),
         name='story.detail'
         ),
-    url(regex=r'^story/$',
+    url(regex=r'^$',
         view=StoryListView.as_view(),
         name='story.list'
         ),
-    url(regex=r'^story/(?P<pk>\d+)/approve/$',
+    url(regex=r'^(?P<pk>\d+)/approve/$',
         view=StoryModerateView.as_view(),
         name='story.moderate'
         ),
-    url(regex=r'^story/(?P<pk>\d+)/edit/$',
+    url(regex=r'^(?P<pk>\d+)/edit/$',
         view=StoryUpdateView.as_view(),
         name='story.update'
         ),
