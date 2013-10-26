@@ -19,20 +19,20 @@ def get_readme():
 
 
 setup(
-    name='pkimber-ilivehere',
-    packages=['ilivehere', 'ilivehere.tests', 'ilivehere.management', 'ilivehere.management.commands'],
+    name='pkimber-story',
+    packages=['story', 'story.tests', 'story.management', 'story.management.commands'],
     package_data={
-        'ilivehere': [
+        'story': [
             'static/*.*',
             'templates/*.*',
-            'templates/ilivehere/*.*',
+            'templates/story/*.*',
         ],
     },
-    version='0.0.06',
-    description='ilivehere',
+    version='0.0.07',
+    description='story',
     author='Patrick Kimber',
     author_email='code@pkimber.net',
-    url='git@github.com:pkimber/ilivehere.git',
+    url='git@github.com:pkimber/story.git',
     classifiers=[
         'Development Status :: 1 - Planning',
         'Environment :: Console',

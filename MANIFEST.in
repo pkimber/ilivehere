@@ -1,5 +1,5 @@
-recursive-include ilivehere/static *
-recursive-include ilivehere/templates *
+recursive-include story/static *
+recursive-include story/templates *
 
 include LICENSE
 include README
