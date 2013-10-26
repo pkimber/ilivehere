@@ -1,8 +1,8 @@
-from ilivehere.models import (
+from story.models import (
     Area,
     Story,
 )
-from ilivehere.tests.model_maker import (
+from story.tests.model_maker import (
     make_area,
     make_story,
 )
@@ -28,7 +28,7 @@ def get_story_market_fire():
     return Story.objects.get(title='Market Offices burnt down')
 
 
-def default_scenario_ilivehere():
+def default_scenario_story():
     make_area('Hatherleigh')
     make_area('Exbourne')
     make_story(

@@ -41,7 +41,7 @@ class StoryAnonCreateView(BaseMixin, CreateView):
 
     model = Story
     form_class = StoryAnonForm
-    template_name = 'ilivehere/story_create_form.html'
+    template_name = 'story/story_create_form.html'
 
     def get_context_data(self, **kwargs):
         """
@@ -61,7 +61,7 @@ class StoryTrustCreateView(
 
     model = Story
     form_class = StoryTrustForm
-    template_name = 'ilivehere/story_create_form.html'
+    template_name = 'story/story_create_form.html'
 
     def get_context_data(self, **kwargs):
         """
@@ -136,7 +136,7 @@ class StoryUpdateView(
 
     model = Story
     form_class = StoryTrustForm
-    template_name = 'ilivehere/story_update_form.html'
+    template_name = 'story/story_update_form.html'
 
     def get_object(self, *args, **kwargs):
         obj = super(StoryUpdateView, self).get_object(*args, **kwargs)

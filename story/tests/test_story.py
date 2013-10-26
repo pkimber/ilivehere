@@ -1,10 +1,10 @@
 from django.test import TestCase
 
-from ilivehere.tests.model_maker import (
+from story.tests.model_maker import (
     make_story,
 )
-from ilivehere.tests.scenario import (
-    default_scenario_ilivehere,
+from story.tests.scenario import (
+    default_scenario_story,
     get_area_hatherleigh,
     get_story_craft_fair,
     get_story_market_fire,
@@ -22,7 +22,7 @@ class TestStory(TestCase):
     def setUp(self):
         default_scenario_login()
         user_contractor()
-        default_scenario_ilivehere()
+        default_scenario_story()
 
     def test_can_edit(self):
         """

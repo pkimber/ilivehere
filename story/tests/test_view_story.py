@@ -1,9 +1,9 @@
 from django.core.urlresolvers import reverse
 
 from base.tests.test_utils import PermTestCase
-from ilivehere.models import Story
-from ilivehere.tests.scenario import (
-    default_scenario_ilivehere,
+from story.models import Story
+from story.tests.scenario import (
+    default_scenario_story,
     get_area_hatherleigh,
     get_story_craft_fair,
     get_story_market_fire,
@@ -19,13 +19,13 @@ class TestViewStory(PermTestCase):
     def setUp(self):
         default_scenario_login()
         user_contractor()
-        default_scenario_ilivehere()
+        default_scenario_story()
 
     def test_create_anon(self):
-        self.assert_any(reverse('ilivehere.story.create.anon'))
+        self.assert_any(reverse('story.create.anon'))
 
     def test_create_anon_post(self):
-        url = reverse('ilivehere.story.create.anon')
+        url = reverse('story.create.anon')
         data = dict(
             name='Patrick',
             email='code@pkimber.net',
@@ -38,26 +38,26 @@ class TestViewStory(PermTestCase):
         Story.objects.get(name='Patrick')
 
     def test_create_trust_perm(self):
-        self.assert_logged_in(reverse('ilivehere.story.create.trust'))
+        self.assert_logged_in(reverse('story.create.trust'))
 
     def test_detail_perm(self):
         """the 'assert_logged_in' method uses the 'web' user"""
         story = get_story_market_fire()
         self.assert_logged_in(
-            reverse('ilivehere.story.detail', kwargs={'pk': story.pk})
+            reverse('story.detail', kwargs={'pk': story.pk})
         )
 
     def test_list_perm(self):
-        self.assert_logged_in(reverse('ilivehere.story.list'))
+        self.assert_logged_in(reverse('story.list'))
 
     def test_moderate_perm(self):
         story = get_story_craft_fair()
         self.assert_staff_only(
-            reverse('ilivehere.story.moderate', kwargs={'pk': story.pk})
+            reverse('story.moderate', kwargs={'pk': story.pk})
         )
 
     def test_update_perm(self):
         story = get_story_market_fire()
         self.assert_logged_in(
-            reverse('ilivehere.story.update', kwargs={'pk': story.pk})
+            reverse('story.update', kwargs={'pk': story.pk})
         )

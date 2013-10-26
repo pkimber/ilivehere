@@ -1,4 +1,4 @@
-{% extends "ilivehere/base.html" %}
+{% extends "story/base.html" %}
 
 {% load thumbnail %}
 
@@ -18,7 +18,7 @@
           <div class="pure-menu pure-menu-open pure-menu-horizontal">
             <ul>
               <li>
-                <a href="{% url 'ilivehere.story.moderate' story.pk %}">
+                <a href="{% url 'story.moderate' story.pk %}">
                   <i class="icon-thumbs-up"></i>
                   Publish
                 </a>
@@ -33,7 +33,7 @@
             <td>Title</td>
             <td>
               {% if user_can_edit %}
-                <a href="{% url "ilivehere.story.update" story.pk %}">
+                <a href="{% url "story.update" story.pk %}">
                   <i class="icon-edit"></i>
                   {{ story.title }}
                 </a>

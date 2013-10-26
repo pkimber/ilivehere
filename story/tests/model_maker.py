@@ -1,6 +1,6 @@
 from base.tests.model_maker import clean_and_save
 
-from ilivehere.models import (
+from story.models import (
     Area,
     Story,
 )

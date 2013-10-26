@@ -81,7 +81,7 @@ class Story(TimeStampedModel):
         super(Story, self).save(*args, **kwargs)
 
     def get_absolute_url(self):
-        return reverse('ilivehere.story.detail', args=[self.pk])
+        return reverse('story.detail', args=[self.pk])
 
     def set_moderated(self, user):
         self.date_moderated = datetime.now()

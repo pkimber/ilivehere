@@ -125,7 +125,7 @@ INSTALLED_APPS = (
     'south',
     'base',
     'example',
-    'ilivehere',
+    'story',
     'login',
     # admin after login, so we prefer login templates
     'django.contrib.admin',
