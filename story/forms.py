@@ -1,3 +1,5 @@
+from captcha.fields import CaptchaField
+
 from base.form_utils import (
     RequiredFieldForm,
 )
@@ -6,6 +8,8 @@ from .models import Story
 
 
 class StoryAnonForm(RequiredFieldForm):
+    """user is not logged in... so we need a captcha"""
+    captcha = CaptchaField()
 
     def __init__(self, *args, **kwargs):
         super(StoryAnonForm, self).__init__(*args, **kwargs)

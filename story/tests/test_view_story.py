@@ -32,6 +32,8 @@ class TestViewStory(PermTestCase):
             area=get_area_hatherleigh().pk,
             title='Chilli Night',
             description='Hot, hot, hot...',
+            captcha_0='testing',
+            captcha_1='PASSED',
         )
         response = self.client.post(url, data)
         self.assertEqual(response.status_code, 302)

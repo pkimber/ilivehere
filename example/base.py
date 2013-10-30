@@ -119,6 +119,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
+    'captcha',
     'easy_thumbnails',
     'registration',
     'reversion',
@@ -159,6 +160,11 @@ LOGGING = {
         },
     }
 }
+
+# https://github.com/mbi/django-simple-captcha
+CAPTCHA_LETTER_ROTATION = None
+CAPTCHA_NOISE_FUNCTIONS = None
+CAPTCHA_TEST_MODE = True
 
 # URL where requests are redirected after login when the contrib.auth.login
 # view gets no next parameter.
