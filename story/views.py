@@ -1,12 +1,13 @@
 from django.contrib import messages
 from django.core.exceptions import PermissionDenied
+from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
 from django.views.generic import (
     CreateView,
     DeleteView,
     DetailView,
     ListView,
-    UpdateView
+    UpdateView,
 )
 
 from braces.views import (
@@ -54,6 +55,9 @@ class StoryAnonCreateView(BaseMixin, CreateView):
         if self.request.user and self.request.user.is_active:
             raise PermissionDenied()
         return context
+
+    def get_success_url(self):
+        return reverse('project.home')
 
 
 class StoryTrustCreateView(
