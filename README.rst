@@ -10,9 +10,7 @@ Virtual Environment
 -------------------
 
 Note: replace ``patrick`` with your name (checking in the ``example`` folder
-to make sure a file has been created for you).
-
-::
+to make sure a file has been created for you)::
 
   mkvirtualenv dev_story
   pip install -r requirements/local.txt
@@ -25,17 +23,13 @@ to make sure a file has been created for you).
   add2virtualenv .
   deactivate
 
-To check the order of the imports:
-
-::
+To check the order of the imports::
 
   workon dev_story
   cdsitepackages
   cat _virtualenv_path_extensions.pth
 
-Check the imports are in the correct order e.g:
-
-::
+Check the imports are in the correct order e.g::
 
   /home/patrick/repo/dev/app/story
   /home/patrick/repo/dev/app/login
@@ -44,17 +38,13 @@ Check the imports are in the correct order e.g:
 Testing
 =======
 
-Using ``pytest-django``:
-
-::
+Using ``pytest-django``::
 
   workon dev_story
   find . -name '*.pyc' -delete
   py.test
 
-To stop on first failure:
-
-::
+To stop on first failure::
 
   py.test -x
 

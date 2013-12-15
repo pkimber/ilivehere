@@ -11,6 +11,7 @@ from base.model_utils import TimeStampedModel
 
 class Area(models.Model):
     name = models.CharField(max_length=100)
+    slug = models.SlugField(max_length=100)
 
     class Meta:
         ordering = ['name']
@@ -23,6 +24,34 @@ class Area(models.Model):
 reversion.register(Area)
 
 
+class ModerateState(models.Model):
+    """Accept, reject or pending"""
+    name = models.CharField(max_length=100)
+    slug = models.SlugField(max_length=100)
+
+    class Meta:
+        ordering = ['name']
+        verbose_name = 'Moderate'
+        verbose_name_plural = 'Moderated'
+
+    def __unicode__(self):
+        return unicode('{}'.format(self.name))
+
+    @staticmethod
+    def pending():
+        return ModerateState.objects.get(slug='pending')
+
+    @staticmethod
+    def published(self):
+        return ModerateState.objects.get(slug='published')
+
+    @staticmethod
+    def rejected(self):
+        return ModerateState.objects.get(slug='rejected')
+
+reversion.register(ModerateState)
+
+
 class Event(TimeStampedModel):
     """ Event """
     owner = models.ForeignKey(settings.AUTH_USER_MODEL, blank=True, null=True)
@@ -31,6 +60,7 @@ class Event(TimeStampedModel):
     area = models.ForeignKey(Area)
     title = models.CharField(max_length=100)
     description = models.TextField(blank=True, null=True)
+    moderate_state = models.ForeignKey(ModerateState)
     date_moderated = models.DateTimeField(blank=True, null=True)
     user_moderated = models.ForeignKey(
         settings.AUTH_USER_MODEL, blank=True, null=True, related_name='+'
@@ -47,6 +77,10 @@ class Event(TimeStampedModel):
 reversion.register(Event)
 
 
+def _default_moderate_state():
+    return ModerateState.pending()
+
+
 class Story(TimeStampedModel):
     """News story"""
     user = models.ForeignKey(settings.AUTH_USER_MODEL, blank=True, null=True)
@@ -56,6 +90,7 @@ class Story(TimeStampedModel):
     title = models.CharField(max_length=100)
     description = models.TextField()
     picture = models.ImageField(upload_to='story/%Y/%m/%d', blank=True)
+    moderate_state = models.ForeignKey(ModerateState, default=_default_moderate_state)
     date_moderated = models.DateTimeField(blank=True, null=True)
     user_moderated = models.ForeignKey(
         settings.AUTH_USER_MODEL, blank=True, null=True, related_name='+'
@@ -83,7 +118,9 @@ class Story(TimeStampedModel):
     def get_absolute_url(self):
         return reverse('story.detail', args=[self.pk])
 
+
     def set_moderated(self, user):
+        self.moderate_state = ModerateState.objects.get(slug='published')
         self.date_moderated = datetime.now()
         self.user_moderated = user
 

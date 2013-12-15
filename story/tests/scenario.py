@@ -1,9 +1,11 @@
 from story.models import (
     Area,
+    ModerateState,
     Story,
 )
 from story.tests.model_maker import (
     make_area,
+    make_moderate_state,
     make_story,
 )
 from login.tests.scenario import (
@@ -28,7 +30,14 @@ def get_story_market_fire():
     return Story.objects.get(title='Market Offices burnt down')
 
 
+def create_default_moderate_state():
+    make_moderate_state('pending')
+    make_moderate_state('published')
+    make_moderate_state('rejected')
+
+
 def default_scenario_story():
+    create_default_moderate_state()
     make_area('Hatherleigh')
     make_area('Exbourne')
     make_story(

@@ -121,7 +121,6 @@ INSTALLED_APPS = (
     # 'django.contrib.admindocs',
     'captcha',
     'easy_thumbnails',
-    'registration',
     'reversion',
     'south',
     'base',
@@ -165,6 +164,9 @@ LOGGING = {
 CAPTCHA_LETTER_ROTATION = None
 CAPTCHA_NOISE_FUNCTIONS = None
 CAPTCHA_TEST_MODE = True
+
+FTP_STATIC_DIR = None
+FTP_STATIC_URL = None
 
 # URL where requests are redirected after login when the contrib.auth.login
 # view gets no next parameter.
