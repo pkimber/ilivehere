@@ -14,11 +14,11 @@
   <div class="pure-g-r">
     <div class="pure-u-1">
       {% if user.is_staff %}
-        {% if not story.moderated %}
+        {% if not story.publish %}
           <div class="pure-menu pure-menu-open pure-menu-horizontal">
             <ul>
               <li>
-                <a href="{% url 'story.moderate' story.pk %}">
+                <a href="{% url 'story.publish' story.pk %}">
                   <i class="icon-thumbs-up"></i>
                   Publish
                 </a>

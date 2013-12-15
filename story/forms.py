@@ -1,3 +1,5 @@
+from django import forms
+
 from captcha.fields import CaptchaField
 
 from base.form_utils import (
@@ -5,6 +7,13 @@ from base.form_utils import (
 )
 
 from .models import Story
+
+
+class StoryEmptyForm(forms.ModelForm):
+
+    class Meta:
+        model = Story
+        fields = ()
 
 
 class StoryAnonForm(RequiredFieldForm):

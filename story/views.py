@@ -17,6 +17,7 @@ from braces.views import (
 
 from .forms import (
     StoryAnonForm,
+    StoryEmptyForm,
     StoryTrustForm,
 )
 from .models import Story
@@ -109,19 +110,16 @@ class StoryListView(
         return result
 
 
-class StoryModerateView(
-        LoginRequiredMixin, StaffuserRequiredMixin, BaseMixin, DeleteView):
-    """
-    TODO should this be an update view with an empty form?  Might be safer
-    than using a delete view
-    """
+class StoryPublishView(
+        LoginRequiredMixin, StaffuserRequiredMixin, BaseMixin, UpdateView):
 
     model = Story
+    form_class = StoryEmptyForm
+    template_name = 'story/story_publish_form.html'
 
-    def delete(self, request, *args, **kwargs):
-        self.object = self.get_object()
+    def form_valid(self, form):
+        self.object = form.save(commit=False)
         self.object.set_moderated(self.request.user)
-        self.object.save()
         messages.info(
             self.request,
             "Published story {}, {}".format(
@@ -129,10 +127,7 @@ class StoryModerateView(
                 self.object.title,
             )
         )
-        return HttpResponseRedirect(self.get_success_url())
-
-    def get_success_url(self):
-        return self.object.get_absolute_url()
+        return super(StoryPublishView, self).form_valid(form)
 
 
 class StoryUpdateView(
