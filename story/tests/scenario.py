@@ -31,9 +31,18 @@ def get_story_market_fire():
 
 
 def create_default_moderate_state():
-    make_moderate_state('pending')
-    make_moderate_state('published')
-    make_moderate_state('rejected')
+    try:
+        ModerateState.pending()
+    except ModerateState.DoesNotExist:
+        make_moderate_state('pending')
+    try:
+        ModerateState.published()
+    except ModerateState.DoesNotExist:
+        make_moderate_state('published')
+    try:
+        ModerateState.rejected()
+    except ModerateState.DoesNotExist:
+        make_moderate_state('rejected')
 
 
 def default_scenario_story():
