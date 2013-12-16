@@ -42,11 +42,11 @@ class ModerateState(models.Model):
         return ModerateState.objects.get(slug='pending')
 
     @staticmethod
-    def published(self):
+    def published():
         return ModerateState.objects.get(slug='published')
 
     @staticmethod
-    def rejected(self):
+    def rejected():
         return ModerateState.objects.get(slug='rejected')
 
 reversion.register(ModerateState)
@@ -118,11 +118,17 @@ class Story(TimeStampedModel):
     def get_absolute_url(self):
         return reverse('story.detail', args=[self.pk])
 
-
-    def set_moderated(self, user):
-        self.moderate_state = ModerateState.objects.get(slug='published')
+    def _set_moderated(self, user):
         self.date_moderated = datetime.now()
         self.user_moderated = user
+
+    def set_published(self, user):
+        self.moderate_state = ModerateState.objects.get(slug='published')
+        self._set_moderated(user)
+
+    def set_rejected(self, user):
+        self.moderate_state = ModerateState.objects.get(slug='rejected')
+        self._set_moderated(user)
 
     def user_can_edit(self, user):
         """
@@ -140,8 +146,12 @@ class Story(TimeStampedModel):
         return self.name or self.user.username
     author = property(_author)
 
-    def _moderated(self):
-        return bool(self.date_moderated)
-    moderated = property(_moderated)
+    def _published(self):
+        return self.moderate_state == ModerateState.published()
+    published = property(_published)
+
+    def _rejected(self):
+        return self.moderate_state == ModerateState.rejected()
+    rejected = property(_rejected)
 
 reversion.register(Story)

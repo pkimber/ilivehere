@@ -66,8 +66,22 @@ class TestStory(TestCase):
             description='completed their 300 mile paddle',
         )
 
-    def test_set_moderated(self):
+    def test_published(self):
         story = get_story_craft_fair()
-        story.set_moderated(get_user_staff())
+        story.set_published(get_user_staff())
         story.save()
-        self.assertTrue(get_story_craft_fair().moderated)
+        self.assertTrue(get_story_craft_fair().published)
+
+    def test_published_not(self):
+        story = get_story_craft_fair()
+        self.assertFalse(get_story_craft_fair().published)
+
+    def test_rejected(self):
+        story = get_story_craft_fair()
+        story.set_rejected(get_user_staff())
+        story.save()
+        self.assertTrue(get_story_craft_fair().rejected)
+
+    def test_rejected_not(self):
+        story = get_story_craft_fair()
+        self.assertFalse(get_story_craft_fair().rejected)

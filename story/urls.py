@@ -7,6 +7,7 @@ from .views import (
     StoryDetailView,
     StoryListView,
     StoryPublishView,
+    StoryRejectView,
     StoryTrustCreateView,
     StoryUpdateView,
 )
@@ -33,6 +34,10 @@ urlpatterns = patterns(
     url(regex=r'^(?P<pk>\d+)/publish/$',
         view=StoryPublishView.as_view(),
         name='story.publish'
+        ),
+    url(regex=r'^(?P<pk>\d+)/reject/$',
+        view=StoryRejectView.as_view(),
+        name='story.reject'
         ),
     url(regex=r'^(?P<pk>\d+)/edit/$',
         view=StoryUpdateView.as_view(),

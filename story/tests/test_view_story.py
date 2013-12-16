@@ -54,8 +54,14 @@ class TestViewStory(PermTestCase):
 
     def test_publish_perm(self):
         story = get_story_craft_fair()
-        self.assert_staff_only(
+        self.assert_logged_in(
             reverse('story.publish', kwargs={'pk': story.pk})
+        )
+
+    def test_reject_perm(self):
+        story = get_story_craft_fair()
+        self.assert_logged_in(
+            reverse('story.reject', kwargs={'pk': story.pk})
         )
 
     def test_update_perm(self):

@@ -13,20 +13,29 @@
 {% block content %}
   <div class="pure-g-r">
     <div class="pure-u-1">
-      {% if user.is_staff %}
-        {% if not story.publish %}
-          <div class="pure-menu pure-menu-open pure-menu-horizontal">
-            <ul>
-              <li>
-                <a href="{% url 'story.publish' story.pk %}">
-                  <i class="icon-thumbs-up"></i>
-                  Publish
-                </a>
-              </li>
-            </ul>
-          </div>
-        {% endif %}
-      {% endif %}
+      <div class="pure-menu pure-menu-open pure-menu-horizontal">
+        <ul>
+          <li>
+            <a href="{% url 'story.list' %}">
+              <i class="fa fa-list"></i>
+              Stories
+            </a>
+          </li>
+          <li>
+            {% if story.published %}
+              <a href="{% url 'story.reject' story.pk %}">
+                <i class="fa fa-thumbs-o-down"></i>
+                Reject
+              </a>
+            {% else %}
+              <a href="{% url 'story.publish' story.pk %}">
+                <i class="fa fa-thumbs-o-up"></i>
+                Publish
+              </a>
+            {% endif %}
+          </li>
+        </ul>
+      </div>
       <table class="pure-table pure-table-bordered">
         <tbody>
           <tr>
@@ -34,7 +43,7 @@
             <td>
               {% if user_can_edit %}
                 <a href="{% url "story.update" story.pk %}">
-                  <i class="icon-edit"></i>
+                  <i class="fa fa-edit"></i>
                   {{ story.title }}
                 </a>
               {% else %}
@@ -42,9 +51,20 @@
               {% endif %}
             </td>
           </tr>
-          {% if story.moderated %}
+          {% if story.published %}
             <tr>
-              <td>Moderated</td>
+              <td>Published</td>
+              <td>
+                {{ story.user_moderated }}
+                <small>on {{ story.date_moderated|date:"l d/m/y H:i" }}</small>
+              </td>
+            </tr>
+          {% endif %}
+          {% if story.rejected %}
+            <tr>
+              <td>
+                <strong>Rejected</strong>
+              </td>
               <td>
                 {{ story.user_moderated }}
                 <small>on {{ story.date_moderated|date:"l d/m/y H:i" }}</small>

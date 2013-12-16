@@ -84,6 +84,9 @@ class StoryTrustCreateView(
         self.object.user = self.request.user
         return super(StoryTrustCreateView, self).form_valid(form)
 
+    def get_success_url(self):
+        return reverse('story.list')
+
 
 class StoryDetailView(
         LoginRequiredMixin, CheckPermMixin, BaseMixin, DetailView):
@@ -111,7 +114,7 @@ class StoryListView(
 
 
 class StoryPublishView(
-        LoginRequiredMixin, StaffuserRequiredMixin, BaseMixin, UpdateView):
+        LoginRequiredMixin, BaseMixin, UpdateView):
 
     model = Story
     form_class = StoryEmptyForm
@@ -119,7 +122,7 @@ class StoryPublishView(
 
     def form_valid(self, form):
         self.object = form.save(commit=False)
-        self.object.set_moderated(self.request.user)
+        self.object.set_published(self.request.user)
         messages.info(
             self.request,
             "Published story {}, {}".format(
@@ -128,6 +131,32 @@ class StoryPublishView(
             )
         )
         return super(StoryPublishView, self).form_valid(form)
+
+    def get_success_url(self):
+        return reverse('story.list')
+
+
+class StoryRejectView(
+        LoginRequiredMixin, BaseMixin, UpdateView):
+
+    model = Story
+    form_class = StoryEmptyForm
+    template_name = 'story/story_reject_form.html'
+
+    def form_valid(self, form):
+        self.object = form.save(commit=False)
+        self.object.set_rejected(self.request.user)
+        messages.info(
+            self.request,
+            "Rejected story {}, {}".format(
+                self.object.pk,
+                self.object.title,
+            )
+        )
+        return super(StoryRejectView, self).form_valid(form)
+
+    def get_success_url(self):
+        return reverse('story.list')
 
 
 class StoryUpdateView(

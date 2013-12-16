@@ -11,6 +11,16 @@
 {% block content %}
   <div class="pure-g-r">
     <div class="pure-u-1">
+      <div class="pure-menu pure-menu-open pure-menu-horizontal">
+        <ul>
+          <li>
+            <a href="{% url 'story.create.trust' %}">
+              <i class="fa fa-edit"></i>
+              Create
+            </a>
+          </li>
+        </ul>
+      </div>
       <table class="pure-table pure-table-bordered">
         <thead>
           <tr>
@@ -29,7 +39,9 @@
               </td>
               <td>
                 <a href="{% url 'story.detail' story.pk %}">
+                  {% if story.rejected %}<del>{% endif %}
                   {{ story.title }}
+                  {% if story.rejected %}</del>{% endif %}
                 </a>
               </td>
               <td>{{ story.area.name }}</td>
@@ -38,11 +50,12 @@
                 <small> {{ story.created|date:"d/m/Y" }}</small>
               </td>
               <td>
-                {% if story.moderated %}
-                  <i class="icon-check"></i>
+                {% if story.published %}
+                  <i class="fa fa-thumbs-o-up"></i>
                   <small>{{ story.date_moderated|date:"d/m/y" }}</small>
-                {% else %}
-                  <i class="icon-check-empty"></i>
+                {% elif story.rejected %}
+                  <i class="fa fa-thumbs-o-down"></i>
+                  <small>{{ story.date_moderated|date:"d/m/y" }}</small>
                 {% endif %}
               </td>
             </tr>
