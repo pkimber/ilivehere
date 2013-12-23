@@ -28,7 +28,7 @@ setup(
             'templates/story/*.*',
         ],
     },
-    version='0.0.11',
+    version='0.0.12',
     description='story',
     author='Patrick Kimber',
     author_email='code@pkimber.net',
