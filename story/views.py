@@ -45,17 +45,15 @@ class StoryAnonCreateView(BaseMixin, CreateView):
     form_class = StoryAnonForm
     template_name = 'story/story_create_form.html'
 
-    def get_context_data(self, **kwargs):
+    def get(self, request, *args, **kwargs):
         """
         If a user is logged in (and active), they shouldn't be using this
-        view!
-        We don't do anything with the context... but it is a good place to
-        check some stuff.
+        view... they can use the view for a logged in user.
         """
-        context = super(StoryAnonCreateView, self).get_context_data(**kwargs)
         if self.request.user and self.request.user.is_active:
-            raise PermissionDenied()
-        return context
+            return HttpResponseRedirect(reverse('story.create.trust'))
+        else:
+            return super(StoryAnonCreateView, self).get(request, *args, **kwargs)
 
     def get_success_url(self):
         return reverse('project.home')
