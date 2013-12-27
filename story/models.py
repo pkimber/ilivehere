@@ -25,7 +25,11 @@ reversion.register(Area)
 
 
 class ModerateState(models.Model):
-    """Accept, reject or pending"""
+    """Accept, reject or pending.
+
+    Copy of class in `cms.models'.
+
+    """
     name = models.CharField(max_length=100)
     slug = models.SlugField(max_length=100)
 
@@ -46,8 +50,8 @@ class ModerateState(models.Model):
         return ModerateState.objects.get(slug='published')
 
     @staticmethod
-    def rejected():
-        return ModerateState.objects.get(slug='rejected')
+    def removed():
+        return ModerateState.objects.get(slug='removed')
 
 reversion.register(ModerateState)
 
@@ -123,11 +127,11 @@ class Story(TimeStampedModel):
         self.user_moderated = user
 
     def set_published(self, user):
-        self.moderate_state = ModerateState.objects.get(slug='published')
+        self.moderate_state = ModerateState.published()
         self._set_moderated(user)
 
-    def set_rejected(self, user):
-        self.moderate_state = ModerateState.objects.get(slug='rejected')
+    def set_removed(self, user):
+        self.moderate_state = ModerateState.removed()
         self._set_moderated(user)
 
     def user_can_edit(self, user):
@@ -150,8 +154,8 @@ class Story(TimeStampedModel):
         return self.moderate_state == ModerateState.published()
     published = property(_published)
 
-    def _rejected(self):
-        return self.moderate_state == ModerateState.rejected()
-    rejected = property(_rejected)
+    def _removed(self):
+        return self.moderate_state == ModerateState.removed()
+    removed = property(_removed)
 
 reversion.register(Story)

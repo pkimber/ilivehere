@@ -7,7 +7,7 @@ from .views import (
     StoryDetailView,
     StoryListView,
     StoryPublishView,
-    StoryRejectView,
+    StoryRemoveView,
     StoryTrustCreateView,
     StoryUpdateView,
 )
@@ -35,9 +35,9 @@ urlpatterns = patterns(
         view=StoryPublishView.as_view(),
         name='story.publish'
         ),
-    url(regex=r'^(?P<pk>\d+)/reject/$',
-        view=StoryRejectView.as_view(),
-        name='story.reject'
+    url(regex=r'^(?P<pk>\d+)/remove/$',
+        view=StoryRemoveView.as_view(),
+        name='story.remove'
         ),
     url(regex=r'^(?P<pk>\d+)/edit/$',
         view=StoryUpdateView.as_view(),

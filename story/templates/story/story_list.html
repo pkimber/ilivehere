@@ -39,9 +39,9 @@
               </td>
               <td>
                 <a href="{% url 'story.detail' story.pk %}">
-                  {% if story.rejected %}<del>{% endif %}
+                  {% if story.removed %}<del>{% endif %}
                   {{ story.title }}
-                  {% if story.rejected %}</del>{% endif %}
+                  {% if story.removed %}</del>{% endif %}
                 </a>
               </td>
               <td>{{ story.area.name }}</td>
@@ -53,7 +53,7 @@
                 {% if story.published %}
                   <i class="fa fa-thumbs-o-up"></i>
                   <small>{{ story.date_moderated|date:"d/m/y" }}</small>
-                {% elif story.rejected %}
+                {% elif story.removed %}
                   <i class="fa fa-thumbs-o-down"></i>
                   <small>{{ story.date_moderated|date:"d/m/y" }}</small>
                 {% endif %}

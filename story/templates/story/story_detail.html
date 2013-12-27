@@ -23,9 +23,9 @@
           </li>
           <li>
             {% if story.published %}
-              <a href="{% url 'story.reject' story.pk %}">
+              <a href="{% url 'story.remove' story.pk %}">
                 <i class="fa fa-thumbs-o-down"></i>
-                Reject
+                Remove
               </a>
             {% else %}
               <a href="{% url 'story.publish' story.pk %}">
@@ -60,10 +60,10 @@
               </td>
             </tr>
           {% endif %}
-          {% if story.rejected %}
+          {% if story.removed %}
             <tr>
               <td>
-                <strong>Rejected</strong>
+                <strong>Removed</strong>
               </td>
               <td>
                 {{ story.user_moderated }}

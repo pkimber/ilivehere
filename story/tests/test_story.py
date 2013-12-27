@@ -76,12 +76,12 @@ class TestStory(TestCase):
         story = get_story_craft_fair()
         self.assertFalse(get_story_craft_fair().published)
 
-    def test_rejected(self):
+    def test_removed(self):
         story = get_story_craft_fair()
-        story.set_rejected(get_user_staff())
+        story.set_removed(get_user_staff())
         story.save()
-        self.assertTrue(get_story_craft_fair().rejected)
+        self.assertTrue(get_story_craft_fair().removed)
 
-    def test_rejected_not(self):
+    def test_removed_not(self):
         story = get_story_craft_fair()
-        self.assertFalse(get_story_craft_fair().rejected)
+        self.assertFalse(get_story_craft_fair().removed)

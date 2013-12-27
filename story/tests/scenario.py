@@ -40,9 +40,9 @@ def create_default_moderate_state():
     except ModerateState.DoesNotExist:
         make_moderate_state('published')
     try:
-        ModerateState.rejected()
+        ModerateState.removed()
     except ModerateState.DoesNotExist:
-        make_moderate_state('rejected')
+        make_moderate_state('removed')
 
 
 def default_scenario_story():

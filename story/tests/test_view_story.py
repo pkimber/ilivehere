@@ -58,10 +58,10 @@ class TestViewStory(PermTestCase):
             reverse('story.publish', kwargs={'pk': story.pk})
         )
 
-    def test_reject_perm(self):
+    def test_remove_perm(self):
         story = get_story_craft_fair()
         self.assert_logged_in(
-            reverse('story.reject', kwargs={'pk': story.pk})
+            reverse('story.remove', kwargs={'pk': story.pk})
         )
 
     def test_update_perm(self):

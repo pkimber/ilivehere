@@ -134,19 +134,19 @@ class StoryPublishView(
         return reverse('story.list')
 
 
-class StoryRejectView(
+class StoryRemoveView(
         LoginRequiredMixin, BaseMixin, UpdateView):
 
     model = Story
     form_class = StoryEmptyForm
-    template_name = 'story/story_reject_form.html'
+    template_name = 'story/story_remove_form.html'
 
     def form_valid(self, form):
         self.object = form.save(commit=False)
-        self.object.set_rejected(self.request.user)
+        self.object.set_removed(self.request.user)
         messages.info(
             self.request,
-            "Rejected story {}, {}".format(
+            "Removed story {}, {}".format(
                 self.object.pk,
                 self.object.title,
             )
