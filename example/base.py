@@ -110,7 +110,7 @@ TEMPLATE_DIRS = (
     # Don't forget to use absolute paths, not relative paths.
 )
 
-INSTALLED_APPS = (
+DJANGO_APPS = (
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
@@ -119,17 +119,26 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
+    # admin after login, so we prefer login templates
+    'django.contrib.admin',
+)
+
+THIRD_PARTY_APPS = (
     'captcha',
     'easy_thumbnails',
     'reversion',
     'south',
+)
+
+LOCAL_APPS = (
     'base',
     'example',
     'story',
     'login',
-    # admin after login, so we prefer login templates
-    'django.contrib.admin',
+    'moderate',
 )
+
+INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
 
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to

@@ -1,11 +1,15 @@
+from moderate.models import (
+    ModerateState,
+)
+from moderate.tests.model_maker import (
+    make_moderate_state,
+)
 from story.models import (
     Area,
-    ModerateState,
     Story,
 )
 from story.tests.model_maker import (
     make_area,
-    make_moderate_state,
     make_story,
 )
 from login.tests.scenario import (
